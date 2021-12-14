@@ -23,16 +23,15 @@ function App() {
 
   // API POST for wishes
   function addWish(title, description, link, author) {
-    if (title.length <= 500) {
       const newWish = {
-        method: 'PUT',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "title": title, "description": description, "link": link, "author": author }),
       };
       fetch(`${API_URL}/wishes`, newWish)
         .then(response => response.json())
         .then(createdWish => setWish([...wishes, createdWish]));
-    }
+
   }
 
   // API PUT for adding comments

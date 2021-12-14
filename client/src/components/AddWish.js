@@ -24,7 +24,7 @@ function AddWish(props) {
                     <input onChange={(event) => setLink(event.target.value)} type="text" />
                 </label>
                 <label>
-                    <strong>Awho wish it? </strong>
+                    <strong>who wish this? </strong>
                     <input onChange={(event) => setAuthor(event.target.value)} type="text" />
                 </label>
                 <input type="submit" onClick={(event) => {

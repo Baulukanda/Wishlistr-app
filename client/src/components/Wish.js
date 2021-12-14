@@ -5,6 +5,9 @@ function Wish(props) {
     const { addComment } = props
     const [wish, setWish] = useState([]);
     const [comment, setComment] = useState();
+    const [commentAuthor, setcommentAuthor] = useState("");
+    const [commentDate, setcommentDate] = useState("");
+
 
     useEffect(() => {
         async function getWishData() {
@@ -20,20 +23,23 @@ function Wish(props) {
 
     return (
         <>
-            <h3>{wish?.title}</h3>
+            <p><strong>Wish: </strong>{wish?.title}</p>
             <p><strong>Author: </strong> {wish?.author}</p>
             <p><strong>Description: </strong> {wish?.description}</p>
-            <p><strong>Link: </strong>  {wish?.link}</p>
+            <p><strong>Link: </strong>{wish?.link}</p>
             <p><strong>Creation date: </strong>  {wish?.creationDate}</p>
             <p><strong>Comments: </strong>  {wish?.comments}</p>
             <form >
                 <label>
-                    <strong>Add comment </strong>
+                <   strong>Add comment </strong>
                     <input onChange={(event) => setComment(event.target.value)} type="text" />
                 </label>
-                <button type="submit" onClick={(event) => { addComment(comment, wish.id) }}>Add</button>
+                <label>
+                    <strong>who said it?: </strong>
+                    <input onChange={(event) => setcommentAuthor(event.target.value)} type="text" />
+                </label>
+                <input type="submit" onClick={(event) => { addComment(comment, commentAuthor);}} value="Add comment" />
             </form>
-
         </>
     );
 }

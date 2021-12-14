@@ -12,19 +12,19 @@ function AddWish(props) {
         <>
             <form >
                 <label>
-                    Wish:
+                    <strong>Your Wish </strong>
                     <input onChange={(event) => setTitle(event.target.value)} type="text" />
                 </label>
                 <label>
-                    Description:
+                    <strong>Description </strong>
                     <input onChange={(event) => setDescription(event.target.value)} type="text" />
                 </label>
                 <label>
-                    Link:
+                    <strong>Link </strong>
                     <input onChange={(event) => setLink(event.target.value)} type="text" />
                 </label>
                 <label>
-                    who wished this?:
+                    <strong>Awho wish it? </strong>
                     <input onChange={(event) => setAuthor(event.target.value)} type="text" />
                 </label>
                 <input type="submit" onClick={(event) => {

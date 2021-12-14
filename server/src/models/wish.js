@@ -7,8 +7,9 @@ const wishSchema = new mongoose.Schema({
   },
   description: String,
   link: String,
-  comment: [tring],
-  dateCreated: Date
+  creationDate: { type: Date, default: Date.now },
+  comments: [String],
+  author: String
 });
 
 const Wish = mongoose.model("Wish", wishSchema);

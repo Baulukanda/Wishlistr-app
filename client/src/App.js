@@ -4,8 +4,6 @@ import Wish from "./components/Wish";
 import Wishes from "./components/wishes";
 const API_URL = process.env.REACT_APP_API;
 
-
-
 function App() {
   const [wishes, setWish] = useState([]);
 
@@ -50,13 +48,11 @@ function App() {
       .then(createdComment => setWish([...wishes.slice(0, postIndex), createdComment, ...wishes.slice(postIndex + 1)]));
   }
 
-
   return (
     <>
-
       <Router>
         <Wishes path="/" data={wishes} addWish={addWish} addComment={addComment}></Wishes>
-        <Wish path="/wish/:id" getWish={getWish}></Wish>
+        <Wish path="/wish/:id" getWish={getWish} addComment={addComment}></Wish>
       </Router>
     </>
   );

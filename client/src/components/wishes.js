@@ -3,7 +3,8 @@ import { useState } from "react";
 import AddWish from "./AddWish";
 
 function Wishes(props) {
-    const { data, addComment } = props;
+    let data = props.data;
+    const { addComment } = props;
     const [comment, setComment] = useState();
 
     return (
@@ -14,16 +15,19 @@ function Wishes(props) {
                 {
                     data.map((wish) => {
                         return (
-                            <li key={wish._id}>
-                                <Link to={`/wish/${wish.id}`}>{wish.title}</Link>
-                                <p>Comments: {wish.comment}</p>
+                            <li key={wish.id}>
+                                <strong>Title: </strong>
+                                <Link to={`/wish/${wish._id}`}>{wish.title}</Link>
+                                <p><strong>Author: </strong>{wish?.author}</p>
+                                <p><strong>Comments: </strong>{wish?.comments}</p>
                                 <form >
                                     <label>
-                                        Add comment:
+                                        <strong>Add comment </strong>
                                         <input onChange={(event) => setComment(event.target.value)} type="text" />
                                     </label>
-                                    <button type="submit" onClick={(event) => { addComment(wish.id, comment) }}>Add</button>
+                                    <button type="submit" onClick={(event) => { addComment(comment, wish.id) }}>Add</button>
                                 </form>
+
                             </li>
                         )
                     })

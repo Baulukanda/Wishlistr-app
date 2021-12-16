@@ -29,7 +29,7 @@ function AddWish(props) {
                 </label>
                 <input type="submit" onClick={(event) => {
                     addWish(title, description, link, author);
-                }} value="Add wish" />
+                }} value="Add" />
             </form>
 
         </>

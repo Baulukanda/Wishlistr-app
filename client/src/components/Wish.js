@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
+import AddComment from "./AddComment";
 const API_URL = process.env.REACT_APP_API;
 
 function Wish(props) {
     const { addComment } = props
     const [wish, setWish] = useState([]);
-    const [comment, setComment] = useState();
-    const [commentAuthor, setcommentAuthor] = useState("");
-    const [commentDate, setcommentDate] = useState("");
+
 
 
     useEffect(() => {
@@ -15,7 +14,6 @@ function Wish(props) {
             const url = `${API_URL}/wishes/${id}`;
             const response = await fetch(url);
             const data = await response.json();
-            console.log(id)
             setWish(data)
         }
         getWishData();
@@ -27,19 +25,15 @@ function Wish(props) {
             <p><strong>Author: </strong> {wish?.author}</p>
             <p><strong>Description: </strong> {wish?.description}</p>
             <p><strong>Link: </strong>{wish?.link}</p>
-            <p><strong>Creation date: </strong>  {wish?.creationDate}</p>
-            <p><strong>Comments: </strong>  {wish?.comments}</p>
-            <form >
-                <label>
-                <   strong>Add comment </strong>
-                    <input onChange={(event) => setComment(event.target.value)} type="text" />
-                </label>
-                <label>
-                    <strong>who said it?: </strong>
-                    <input onChange={(event) => setcommentAuthor(event.target.value)} type="text" />
-                </label>
-                <input type="submit" onClick={(event) => { addComment(comment, commentAuthor);}} value="Add comment" />
-            </form>
+
+            <ul>
+                {(wish.comments || []).map((item) => (
+                    <li key={item._id}>
+                        {item.text}
+                    </li>
+                ))}
+            </ul>
+            <AddComment id={wish._id} addComment={addComment}></AddComment>
         </>
     );
 }

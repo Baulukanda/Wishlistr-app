@@ -6,7 +6,6 @@ const API_URL = process.env.REACT_APP_API;
 
 function App() {
   const [wishes, setWish] = useState([]);
-
   useEffect(() => {
     async function getWishData() {
       const url = `${API_URL}/wishes`;
@@ -23,34 +22,32 @@ function App() {
 
   // API POST for wishes
   function addWish(title, description, link, author) {
-      const newWish = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ "title": title, "description": description, "link": link, "author": author }),
-      };
-      fetch(`${API_URL}/wishes`, newWish)
-        .then(response => response.json())
-        .then(createdWish => setWish([...wishes, createdWish]));
+    const newWish = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "title": title, "description": description, "link": link, "author": author }),
+    };
+    fetch(`${API_URL}/wishes`, newWish)
+      .then(response => response.json())
+      .then(createdWish => setWish([...wishes, createdWish]));
 
   }
 
-  // API PUT for adding comments
-  function addComment(comment, id) {
+  function addComment(text, author, id) {
     const newComment = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ "comments": comment })
+      body: JSON.stringify({ "text": text, "author": author }),
     };
-    const postIndex = wishes.findIndex(post => post._id === id)
-    fetch(`${API_URL}/wishes/${id}/comment`, newComment)
+    fetch(`${API_URL}/wishes/${id}/comments`, newComment)
       .then(response => response.json())
-      .then(createdComment => setWish([...wishes.slice(0, postIndex), createdComment, ...wishes.slice(postIndex + 1)]));
+      .then(createdComment => setWish([...wishes, createdComment]));
   }
 
   return (
     <>
       <Router>
-        <Wishes path="/" data={wishes} addWish={addWish} addComment={addComment}></Wishes>
+        <Wishes path="/" data={wishes} addWish={addWish}></Wishes>
         <Wish path="/wish/:id" getWish={getWish} addComment={addComment}></Wish>
       </Router>
     </>

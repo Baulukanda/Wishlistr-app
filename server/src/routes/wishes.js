@@ -41,13 +41,12 @@ wishRoutes.get("/:id", async (req, res) => {
 // wishes
 wishRoutes.put("/:id/comments", async (req, res) => {
   try {
-    const comment = await req.body.comments;
+    const comment = await req.body
     const wish = await Wish.findByIdAndUpdate(req.params.id, { $push: { comments: comment } }, { returnDocument: `after` });
     res.json(wish)
-
   } catch (error) {
     res.status(500);
-    res.json({ error: "Quote could not be updated", details: error.toString() });
+    res.json({ error: "wish could not be updated", details: error.toString() });
   }
 });
 

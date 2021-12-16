@@ -1,5 +1,4 @@
 import { Link } from "@reach/router";
-import { useState } from "react";
 import AddWish from "./AddWish";
 
 function Wishes(props) {
@@ -19,7 +18,6 @@ function Wishes(props) {
                                 <Link to={`/wish/${wish._id}`}>{wish.title}</Link>
                                 <p><strong>Description: </strong> {wish?.description}</p>
                                 <p><strong>Link: </strong>{wish?.link}</p>
-                                <p><strong>Creation date: </strong>  {wish?.creationDate}</p>
                             </li>
                         )
                     })

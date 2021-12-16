@@ -2,7 +2,6 @@ import { useState } from "react"
 
 function AddComment(props) {
     const { addComment, id } = props;
-
     const [text, setText] = useState("");
     const [author, setAuthor] = useState("");
 

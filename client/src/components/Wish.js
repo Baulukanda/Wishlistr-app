@@ -24,7 +24,7 @@ function Wish(props) {
             <h2>{wish?.title}</h2>
             <p><strong>By: </strong> {wish?.author}</p>
             <p><strong>Description: </strong> {wish?.description}</p>
-            <strong>Link to the wish: </strong><a href={wish?.link} rel='noreferrer' target='_blank'>Find</a>
+            <strong>External link : </strong><a href={wish?.link} rel='noreferrer' target='_blank'>Go to link</a>
             <p><strong>Date: </strong> {wish?.createdAt}</p>
             <AddComment id={wish._id} addComment={addComment}></AddComment>
 

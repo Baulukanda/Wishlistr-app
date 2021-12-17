@@ -16,7 +16,7 @@ function Wishes(props) {
                             <li key={wish.id}>
                                 <h2><Link to={`/wish/${wish._id}`}>{wish.title}</Link></h2>
                                 <p><strong>Description: </strong> {wish?.description}</p>
-                                <strong>Link to the wish: </strong><a href={wish.link} rel='noreferrer' target='_blank'>Find</a>
+                                <strong>External link : </strong><a href={wish?.link} rel='noreferrer' target='_blank'>Go to link</a>
                                 <p><strong>Comments: </strong>  ({wish.comments.length})</p>
                             </li>
                         )

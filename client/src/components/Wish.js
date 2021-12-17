@@ -21,19 +21,23 @@ function Wish(props) {
 
     return (
         <>
-            <p><strong>Wish: </strong>{wish?.title}</p>
-            <p><strong>Author: </strong> {wish?.author}</p>
+            <h2>{wish?.title}</h2>
+            <p><strong>By: </strong> {wish?.author}</p>
             <p><strong>Description: </strong> {wish?.description}</p>
-            <p><strong>Link: </strong>{wish?.link}</p>
+            <strong>Link to the wish: </strong><a href={wish?.link} rel='noreferrer' target='_blank'>Find</a>
+            <p><strong>Date: </strong> {wish?.createdAt}</p>
+            <AddComment id={wish._id} addComment={addComment}></AddComment>
 
+            <h2>Comments: </h2>
             <ul>
                 {(wish.comments || []).map((item) => (
                     <li key={item._id}>
-                        {item.text}
+                        <p><strong>Comment: </strong> {item.text}</p>
+                        <p><strong>By: </strong> {item.author}</p>
+                        <p><strong>Date: </strong> {item.createdAt}</p>
                     </li>
                 ))}
             </ul>
-            <AddComment id={wish._id} addComment={addComment}></AddComment>
         </>
     );
 }

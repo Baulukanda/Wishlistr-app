@@ -2,6 +2,9 @@ import { Router } from "@reach/router";
 import { useEffect, useState } from "react";
 import Wish from "./components/Wish";
 import Wishes from "./components/wishes";
+import "./css/main.css"
+
+
 const API_URL = process.env.REACT_APP_API;
 
 function App() {

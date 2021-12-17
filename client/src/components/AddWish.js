@@ -10,7 +10,7 @@ function AddWish(props) {
 
     return (
         <>
-            <form >
+        <form >
                 <label>
                     <strong>Your Wish </strong>
                     <input onChange={(event) => setTitle(event.target.value)} type="text" />
@@ -27,11 +27,10 @@ function AddWish(props) {
                     <strong>who wish this? </strong>
                     <input onChange={(event) => setAuthor(event.target.value)} type="text" />
                 </label>
-                <input type="submit" onClick={(event) => {
+                <input class="btn btn-primary" type="submit" onClick={(event) => {
                     addWish(title, description, link, author);
                 }} value="Add" />
             </form>
-
         </>
     );
 }

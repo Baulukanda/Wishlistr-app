@@ -14,10 +14,10 @@ function Wishes(props) {
                     data.map((wish) => {
                         return (
                             <li key={wish.id}>
-                                <strong>Wish: </strong>
-                                <Link to={`/wish/${wish._id}`}>{wish.title}</Link>
+                                <h2><Link to={`/wish/${wish._id}`}>{wish.title}</Link></h2>
                                 <p><strong>Description: </strong> {wish?.description}</p>
-                                <p><strong>Link: </strong>{wish?.link}</p>
+                                <strong>Link to the wish: </strong><a href={wish.link} rel='noreferrer' target='_blank'>Find</a>
+                                <p><strong>Comments: </strong>  ({wish.comments.length})</p>
                             </li>
                         )
                     })

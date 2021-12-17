@@ -50,4 +50,14 @@ wishRoutes.put("/:id/comments", async (req, res) => {
   }
 });
 
+wishRoutes.delete("/:id", async (req, res) => {
+  try {
+    const wish = await Wish.findByIdAndDelete(req.params.id, { returnDocument: `after` })
+    res.status(200).json(wish)
+  } catch (error) {
+    res.status(500);
+    res.json({ error: "wish could not be deleted", details: error.toString() });
+  }
+});
+
 export default wishRoutes;

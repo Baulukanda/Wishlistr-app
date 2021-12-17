@@ -47,6 +47,16 @@ function App() {
       .then(createdComment => setWish([...wishes, createdComment]));
   }
 
+  function deleteWish(id) {
+    const deletedWish = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    fetch(`${API_URL}/wishes/${id}/comments`, deletedWish)
+      .then(response => response.json())
+   
+  }
+
   return (
     <>
       <Router>

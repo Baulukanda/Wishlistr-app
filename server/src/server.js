@@ -5,9 +5,11 @@ import path from "path";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import checkJwt from "express-jwt"; // Validates access tokens automatically
 
 /* Local files */
 import wishRoutes from "./routes/wishes.js";
+import {createUsersRouter} from "./routes/usersRouter.js";
 
 function createServer() {
   const app = express();
@@ -35,6 +37,41 @@ function createServer() {
 
   /* We add our own routes as middleware on the `/api` path */
   app.use("/api/wishes", wishRoutes);
+
+  // Open paths that do not need login.
+  // You can use various formats to define the open paths.
+  const openPaths = [
+    // Open "/api/users/authenticate" for POST requests
+    { url: "/api/users/authenticate", methods: ["POST"] },
+
+    // Open everything that doesn't begin with "/api"
+    /^(?!\/api).*/gim,
+
+    // Open all GET requests on the form "/api/questions/*" using a regular expression
+    { url: /\/api\/questions\.*/gim, methods: ["GET"] },
+  ];
+
+  // The secret value. Defaults to "the cake is a lie".
+  const secret = process.env.SECRET || "the cake is a lie";
+
+  // Validate the user token using checkJwt middleware.
+  app.use(
+    checkJwt({ secret, algorithms: ["HS512"] }).unless({ path: openPaths })
+  );
+
+  // This middleware checks the result of checkJwt above
+  app.use((err, req, res, next) => {
+    if (err.name === "UnauthorizedError") {
+      // If the user didn't authorize correctly
+      res.status(401).json({ error: err.message }); // Return 401 with error message.
+    } else {
+      next(); // If no errors, forward request to next middleware or route handler
+    }
+  });
+
+  // The routes
+  const usersRouter = createUsersRouter(secret);
+  app.use("/api/users", usersRouter);
 
   /* "Redirect" all non-API GET requests to React's entry point (index.html)
    * which allows the React SPA's client side navigation library to handle full

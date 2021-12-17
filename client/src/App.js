@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Wish from "./components/Wish";
 import Wishes from "./components/wishes";
 import "./css/main.css"
+import AuthService from "./AuthService";
+import Login from "./components/Login";
 
 
 const API_URL = process.env.REACT_APP_API;
@@ -18,6 +20,21 @@ function App() {
     }
     getWishData();
   }, []);
+
+  // Login using API
+  async function login(username, password) {
+    try {
+      await AuthService.login(username, password);
+      // Fetch data again after logging in
+    } catch (error) {
+      console.error("Login", error);
+    }
+  }
+
+  let loginPart = <Login login={login}></Login>;
+  if (!AuthService.loggedIn()) {
+    loginPart = "Logged in!";
+  }
 
   function getWish(id) {
     return wishes.find((wish) => wish.id === parseInt(id));
@@ -54,11 +71,12 @@ function App() {
     };
     fetch(`${API_URL}/wishes/${id}/comments`, deletedWish)
       .then(response => response.json())
-   
+
   }
 
   return (
     <>
+      {loginPart}
       <Router>
         <Wishes path="/" data={wishes} addWish={addWish}></Wishes>
         <Wish path="/wish/:id" getWish={getWish} addComment={addComment}></Wish>

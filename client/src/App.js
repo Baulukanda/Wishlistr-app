@@ -32,7 +32,7 @@ function App() {
   }
 
   let loginPart = <Login login={login}></Login>;
-  if (!AuthService.loggedIn()) {
+  if (AuthService.loggedIn()) {
     loginPart = "Logged in!";
   }
 

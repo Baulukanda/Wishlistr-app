@@ -9,16 +9,16 @@ function AddComment(props) {
         <>
             <form >
                 <label>
-                <strong>Add comment </strong>
+                    <strong>Add comment </strong>
                     <input onChange={(event) => setText(event.target.value)} type="text" />
                 </label>
                 <label>
-                <strong>who said it? </strong>
+                    <strong>who said it? </strong>
                     <input onChange={(event) => setAuthor(event.target.value)} type="text" />
                 </label>
-                <input type="submit" onClick={(event) => {
+                <input type="submit" class="btn btn-primary" onClick={(event) => {
                     addComment(text, author, id);
-                }} value="Add"/>
+                }} value="Add" />
             </form>
         </>
     );

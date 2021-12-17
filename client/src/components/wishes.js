@@ -7,22 +7,34 @@ function Wishes(props) {
 
     return (
         <>
-            <h1>List of Wishes</h1>
             <AddWish addWish={props.addWish}></AddWish>
             <ul>
-                {
-                    data.map((wish) => {
-                        return (
-                            <li key={wish.id}>
-                                <h2><Link to={`/wish/${wish._id}`}>{wish.title}</Link></h2>
-                                <p><strong>Description: </strong> {wish?.description}</p>
-                                <strong>External link : </strong><a href={wish?.link} rel='noreferrer' target='_blank'>Go to link</a>
-                                <p><strong>Comments: </strong>  ({wish.comments.length})</p>
-                            </li>
-                        )
-                    })
-                }
-            </ul><br />
+                <div class="container mt-5">
+                    <div class="row">
+                        {
+
+                            data.map((wish) => {
+                                return (
+                                    <div class="col-sm-4">
+                                        <div class="container mt-3">
+                                            <div class="card front-card">
+                                                <div class="card-body">
+                                                    <li key={wish.id}>
+                                                        <h2 class="wish-title"><Link to={`/wish/${wish._id}`}>{wish.title}</Link></h2>
+                                                        <p><strong>Description: </strong> {wish?.description}</p>
+                                                        <strong>External link : </strong><a href={wish?.link} rel='noreferrer' target='_blank'>Go to link</a>
+                                                        <p><strong>Comments: </strong>  ({wish.comments.length})</p>
+                                                    </li>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+            </ul>
         </>
     )
 }

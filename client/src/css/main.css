@@ -1,0 +1,24 @@
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color:black
+}
+
+.form-group{
+    margin-bottom: 1em;
+}
+
+.wish-title {
+    font-size: 1.5em;
+}
+
+.front-card {
+    height: 300px;
+}
